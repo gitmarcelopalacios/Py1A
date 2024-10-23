@@ -1,0 +1,39 @@
+
+autos = []
+
+autos.append("Fiat")
+autos.append("Ford")
+autos.append("Nissan")
+autos.append("Renault")
+
+print(autos)
+
+x = autos[2]
+
+print(x)
+
+
+autos[0] = "Toyota"
+
+print(autos)
+
+x = len(autos)
+
+print(x)
+
+for x in autos:
+    print(x)
+  
+autos.pop(1)
+
+print('-----------------------------')
+for x in autos:
+    print(x)
+
+
+
+autos.remove("Toyota")
+
+print('-----------------------------')
+for x in autos:
+    print(x)

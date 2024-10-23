@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD de Personas</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>CRUD de Personas</h1>
+
+    <form id="personForm">
+        <input type="hidden" id="index">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="telefono" placeholder="Teléfono" required>
+        <input type="text" id="documento" placeholder="Documento" required>
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Lista de Personas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Documento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="personGrid"></tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
