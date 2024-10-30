@@ -1,3 +1,12 @@
+
+Limites
+
+nombre
+limite_credito
+
+
+
+
 # DEFINO CLASE PRINCIPAL
 
 class Persona:
@@ -24,10 +33,6 @@ def Leer_personas():
     if not personas:
         print("No hay personas disponibles.")
     for persona in personas:
-        #    print(f"Nombre: {persona.nombre}, 
-        #        Domicilio: {persona.domicilio},
-        #        Teléfono: {persona.telefono}, 
-        #        Email: {persona.email}")
         print("Nombre:",persona.nombre, 
               " Domicilio:",persona.domicilio,
               " Teléfono:",persona.telefono, 
@@ -49,7 +54,8 @@ def Actualizar_persona():
 def Borrar_persona():
     nombre = input("Ingrese el nombre de la persona a borrar: ")
     global personas
-    personas = [persona for persona in personas if persona.nombre != nombre]
+    personas = [persona for persona in personas 
+                if persona.nombre != nombre]
     print("¡Persona borrada!")
 
 def Menu():

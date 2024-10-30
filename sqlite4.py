@@ -2,15 +2,14 @@ import sqlite3
 
 # Conectar a la base de datos
 def connect():
-    conn = sqlite3.connect("aaa.db")
+    conn = sqlite3.connect("a1.db")
     cursor = conn.cursor()
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS persona (
+    CREATE TABLE IF NOT EXISTS articulo(
         id INTEGER PRIMARY KEY,
         nombre TEXT NOT NULL,
-        direccion TEXT NOT NULL,
-        telefono TEXT NOT NULL,
-        correo_electronico TEXT NOT NULL
+        ubicacion TEXT NOT NULL,
+        codbar TEXT NOT NULL
     )
     """)
     conn.commit()
@@ -101,3 +100,4 @@ def menu():
 # Ejecutar menú
 if __name__ == "__main__":
     menu()
+    

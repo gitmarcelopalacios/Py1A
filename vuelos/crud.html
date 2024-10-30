@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Clientes</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CRUD de Clientes</h1>
+    <form id="clienteForm">
+        <input type="hidden" id="clienteId">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" required>
+        <button type="submit">Guardar</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="clientesTableBody">
+            <!-- Aquí se insertarán las filas de la tabla -->
+        </tbody>
+    </table>
+    <script>
+        let clientes = [];
+        let idCounter = 1;
+
+        document.getElementById('clienteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = document.getElementById('clienteId').value;
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+
+            if (id) {
+                // Actualizar cliente
+                const cliente = clientes.find(cliente => cliente.id == id);
+                cliente.nombre = nombre;
+                cliente.telefono = telefono;
+            } else {
+                // Crear cliente
+                clientes.push({
+                    id: idCounter++,
+                    nombre: nombre,
+                    telefono: telefono
+                });
+            }
+
+            guardarClientes();
+            document.getElementById('clienteForm').reset();
+            document.getElementById('clienteId').value = '';
+            actualizarTabla();
+        });
+
+        function guardarClientes() {
+            localStorage.setItem('clientes', JSON.stringify(clientes));
+        }
+
+        function cargarClientes() {
+            const storedClientes = localStorage.getItem('clientes');
+            if (storedClientes) {
+                clientes = JSON.parse(storedClientes);
+                idCounter = clientes.length ? Math.max(clientes.map(cliente => cliente.id)) + 1 : 1;
+            }
+            actualizarTabla();
+        }
+
+        function actualizarTabla() {
+            const tableBody = document.getElementById('clientesTableBody');
+            tableBody.innerHTML = '';
+
+            clientes.forEach(cliente => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${cliente.id}</td>
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.telefono}</td>
+                    <td>
+                        <button onclick="editarCliente(${cliente.id})">Editar</button>
+                        <button onclick="borrarCliente(${cliente.id})">Borrar</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function editarCliente(id) {
+            const cliente = clientes.find(cliente => cliente.id == id);
+            document.getElementById('clienteId').value = cliente.id;
+            document.getElementById('nombre').value = cliente.nombre;
+            document.getElementById('telefono').value = cliente.telefono;
+        }
+
+        function borrarCliente(id) {
+            clientes = clientes.filter(cliente => cliente.id != id);
+            guardarClientes();
+            actualizarTabla();
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarClientes);
+    </script>
+</body>
+</html>
