@@ -1,12 +1,4 @@
 
-Limites
-
-nombre
-limite_credito
-
-
-
-
 # DEFINO CLASE PRINCIPAL
 
 class Persona:
